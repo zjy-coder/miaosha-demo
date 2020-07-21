@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjy.mapper.SpikeOptimismMapper">
+    <select id="checkStock" resultType="com.zjy.entity.Stock" parameterType="integer">
+        select id,name,stock,sales,version from t_stock where id = #{id}
+    </select>
+
+    <!--    扣除库存-->
+    <update id="updateStock" parameterType="com.zjy.entity.Stock">
+        update t_stock set sales = sales+1,version = version+1 where id = #{id} and version =#{version}
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjy.mapper.SpikeMapper">
+<!--    扣除库存-->
+    <update id="updateStock" parameterType="com.zjy.entity.Stock">
+        update t_stock set sales = #{sales} where id = #{id}
+    </update>
+<!--    创建订单-->
+    <insert id="createOrder" parameterType="com.zjy.entity.StockOrder" useGeneratedKeys="true" keyProperty="id">
+        insert  into t_stock_order  (s_id,`name`,create_time) values (#{sid},#{name},#{date})
+    </insert>
+
+<!--    检查库存-->
+    <select id="checkStock" resultType="com.zjy.entity.Stock" parameterType="integer">
+        select id,name,stock,sales from t_stock where id = #{id}
+    </select>
+</mapper>
